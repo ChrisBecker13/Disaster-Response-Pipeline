@@ -14,7 +14,7 @@ All libraries are available in Anaconda distribution of Python. The used librari
 - Flask
 - plotly
 - sqlite3
-The code should run using Python versions 3.*.
+- The code should run using Python versions 3.*.
 
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
