@@ -2,6 +2,28 @@
 
 This project aims to build a web application that can automatically classify disaster-related messages. The project utilizes a dataset containing messages in different categories such as water, food, shelter, medicine, and more. These messages are used to train a machine learning model that can classify new messages into their respective categories.
 
+## File description
+        disaster_response_pipeline
+
+          |-- app
+                |-- templates
+                        |-- go.html
+                        |-- master.html
+                |-- run.py
+          |-- data
+                |-- disaster_message.csv
+                |-- disaster_categories.csv
+                |-- DisasterResponse.db
+                |-- process_data.py
+          |-- models
+                |-- classifier.pkl
+                |-- train_classifier.py
+          |-- README
+            |-- ETL Pipeline Preparation.ipynb
+            |-- ML Pipeline Preparation.ipynb 
+            |-- DisasterResponse.db
+            |-- README
+
 ## Project Components
 
 The Disaster Response Pipeline project consists of the following components:
