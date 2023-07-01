@@ -8,9 +8,6 @@
 # - Load `messages.csv` into a dataframe and inspect the first few lines.
 # - Load `categories.csv` into a dataframe and inspect the first few lines.
 
-# In[2]:
-
-
 # import libraries
 import pandas as pd 
 import numpy as np 
@@ -18,15 +15,9 @@ import sqlite3
 from sqlalchemy import create_engine
 
 
-# In[3]:
-
-
 # load messages dataset
 messages = pd.read_csv('messages.csv')
 messages.head()
-
-
-# In[4]:
 
 
 # load categories dataset
@@ -37,8 +28,6 @@ categories.head()
 # ### 2. Merge datasets.
 # - Merge the messages and categories datasets using the common id
 # - Assign this combined dataset to `df`, which will be cleaned in the following steps
-
-# In[5]:
 
 
 # merge datasets
@@ -51,15 +40,10 @@ df.head()
 # - Use the first row of categories dataframe to create column names for the categories data.
 # - Rename columns of `categories` with new column names.
 
-# In[6]:
-
 
 # create a dataframe of the 36 individual category columns
 categories = df['categories'].str.split(';', expand=True)
 categories.head()
-
-
-# In[7]:
 
 
 # select the first row of the categories dataframe
@@ -73,9 +57,6 @@ category_colnames = category_colnames.tolist()
 print(category_colnames)
 
 
-# In[8]:
-
-
 # rename the columns of `categories`
 categories.columns = category_colnames
 categories.head()
@@ -84,9 +65,6 @@ categories.head()
 # ### 4. Convert category values to just numbers 0 or 1.
 # - Iterate through the category columns in df to keep only the last character of each string (the 1 or 0). For example, `related-0` becomes `0`, `related-1` becomes `1`. Convert the string to a numeric value.
 # - You can perform [normal string actions on Pandas Series](https://pandas.pydata.org/pandas-docs/stable/text.html#indexing-with-str), like indexing, by including `.str` after the Series. You may need to first convert the Series to be of type string, which you can do with `astype(str)`.
-
-# In[9]:
-
 
 for column in categories:
     # set each value to be the last character of the string
@@ -101,16 +79,11 @@ categories.head()
 # - Drop the categories column from the df dataframe since it is no longer needed.
 # - Concatenate df and categories data frames.
 
-# In[10]:
-
 
 # drop the original categories column from `df`
 df = df.drop(['categories'],axis = 1)
 
 df.head()
-
-
-# In[11]:
 
 
 # concatenate the original dataframe with the new `categories` dataframe
@@ -123,21 +96,12 @@ df.head()
 # - Drop the duplicates.
 # - Confirm duplicates were removed.
 
-# In[12]:
-
-
 # check number of duplicates
 df[df.duplicated()].count()
 
 
-# In[14]:
-
-
 # drop duplicates
 df.drop_duplicates(inplace = True)
-
-
-# In[15]:
 
 
 # check number of duplicates
@@ -147,18 +111,12 @@ df.duplicated().sum()
 # ### 7. Save the clean dataset into an sqlite database.
 # You can do this with pandas [`to_sql` method](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_sql.html) combined with the SQLAlchemy library. Remember to import SQLAlchemy's `create_engine` in the first cell of this notebook to use it below.
 
-# In[16]:
-
-
 engine = create_engine('sqlite:///DisasterResponse.db')
 df.to_sql('DisasterResponse_table', engine, index=False)
 
 
 # ### 8. Use this notebook to complete `etl_pipeline.py`
 # Use the template file attached in the Resources folder to write a script that runs the steps above to create a database based on new datasets specified by the user. Alternatively, you can complete `etl_pipeline.py` in the classroom on the `Project Workspace IDE` coming later.
-
-# In[ ]:
-
 
 
 
