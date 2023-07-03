@@ -25,7 +25,22 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    """
+    Cleans the input DataFrame by performing the following steps:
+    1. Splits the 'categories' column into separate category columns.
+    2. Extracts new column names from the first row of the categories dataframe.
+    3. Renames the category columns with the new column names.
+    4. Converts the values in the category columns to numeric format.
+    5. Drops the original 'categories' column from the DataFrame.
+    6. Joins the cleaned categories dataframe with the original DataFrame.
+    7. Removes any duplicate rows from the DataFrame.
 
+    Parameters:
+    - df (pandas.DataFrame): Input DataFrame to be cleaned.
+
+    Returns:
+    - cleaned_df (pandas.DataFrame): Cleaned DataFrame with the specified transformations applied.
+    """
     # create a dataframe of the 36 individual category columns
     categories = df.categories.str.split(";", expand=True)
     # select the first row of the categories dataframe
