@@ -61,6 +61,21 @@ def tokenize(text):
     return lemmanitazion
 
 def build_model():
+    """
+    Builds and returns a machine learning model pipeline.
+
+    The pipeline consists of the following steps:
+    1. CountVectorizer: Converts text input into a matrix of token counts.
+    2. TfidfTransformer: Transforms the count matrix into a normalized TF-IDF representation.
+    3. MultiOutputClassifier: Applies a classifier to each target separately.
+    4. DecisionTreeClassifier: A decision tree classifier used as the base estimator.
+
+    GridSearchCV is used to perform hyperparameter tuning by searching over specified parameter values.
+    The hyperparameters being tuned are 'max_depth' and 'min_samples_leaf' of the DecisionTreeClassifier.
+
+    Returns:
+    - cv (GridSearchCV): A GridSearchCV object with the defined pipeline and parameter grid.
+    """    
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
